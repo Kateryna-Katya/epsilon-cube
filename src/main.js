@@ -85,4 +85,51 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Обновляем иконки Lucide, так как добавили новые в Hero
     lucide.createIcons();
+    // --- ЭТАП 3.2: ABOUT SECTION ANIMATIONS ---
+
+    // 1. Анимация появления текста (GSAP ScrollTrigger)
+    gsap.from(".about__content .reveal-text", {
+        scrollTrigger: {
+            trigger: ".about",
+            start: "top 80%",
+        },
+        y: 40,
+        opacity: 0,
+        stagger: 0.15,
+        duration: 1,
+        ease: "power3.out"
+    });
+
+    // 2. Анимация карточек (плавное появление с разной задержкой)
+    gsap.from(".strategy-card", {
+        scrollTrigger: {
+            trigger: ".about__visual",
+            start: "top 80%",
+        },
+        scale: 0.9,
+        opacity: 0,
+        stagger: 0.2,
+        duration: 0.8,
+        ease: "back.out(1.7)"
+    });
+
+    // 3. Анимация счетчиков цифр
+    const counters = document.querySelectorAll('.stat-item__num');
+    counters.forEach(counter => {
+        const target = +counter.getAttribute('data-val');
+        
+        gsap.to(counter, {
+            scrollTrigger: {
+                trigger: counter,
+                start: "top 90%",
+            },
+            innerText: target,
+            duration: 2,
+            snap: { innerText: 1 }, // Округление до целого
+            ease: "power2.out"
+        });
+    });
+
+    // Не забываем обновить иконки
+    lucide.createIcons();
 });
