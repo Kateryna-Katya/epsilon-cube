@@ -13,7 +13,7 @@
     rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
     <script type="module" crossorigin src="/epsilon-cube/index.js"></script>
-    <link rel="stylesheet" crossorigin href="/epsilon-cube/assets/styles-zGqA8nEw.css">
+    <link rel="stylesheet" crossorigin href="/epsilon-cube/assets/styles-BI2-oBLK.css">
   </head>
   <body>
     <div id="scroll-content">
@@ -329,6 +329,86 @@
                     </div>
                 </div>
             </article>
+        </div>
+    </div>
+</section>
+<section class="contact" id="contact">
+    <div class="container">
+        <div class="contact__grid">
+
+            <div class="contact__info">
+                <span class="about__label">Связь</span>
+                <h2 class="contact__title">Начните свой <span class="text-gradient">апгрейд</span></h2>
+                <p class="contact__desc">
+                    Запросите бесплатную консультацию по всем вопросам развития. Мы поможем оценить перспективы проекта
+                    и расширить горизонты вашей карьеры.
+                </p>
+
+                <div class="contact__details">
+                    <div class="contact__item">
+                        <div class="contact__icon"><i data-lucide="phone"></i></div>
+                        <div>
+                            <span>Телефон</span>
+                            <p>+39 02 1234 5678</p>
+                        </div>
+                    </div>
+                    <div class="contact__item">
+                        <div class="contact__icon"><i data-lucide="mail"></i></div>
+                        <div>
+                            <span>Email</span>
+                            <p>hello@epsilon-cube.blog</p>
+                        </div>
+                    </div>
+                    <div class="contact__item">
+                        <div class="contact__icon"><i data-lucide="map-pin"></i></div>
+                        <div>
+                            <span>Офис</span>
+                            <p>Via Dante, 15, 20121 Milano MI, Italia</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="contact__form-wrapper">
+                <form class="form" id="career-form">
+                    <div class="form__group">
+                        <input type="text" name="name" class="form__input" placeholder="Ваше имя" required>
+                    </div>
+                    <div class="form__group">
+                        <input type="email" name="email" class="form__input" placeholder="Email" required>
+                    </div>
+                    <div class="form__group">
+                        <input type="tel" name="phone" class="form__input" id="phone-input"
+                            placeholder="Телефон (только цифры)" required>
+                    </div>
+
+                    <div class="form__captcha">
+                        <label class="captcha-label">Решите пример: <span id="captcha-question"></span></label>
+                        <input type="number" id="captcha-answer" class="form__input" placeholder="Ваш ответ" required>
+                    </div>
+
+                    <div class="form__consent">
+                        <label class="checkbox">
+                            <input type="checkbox" required checked>
+                            <span class="checkbox__box"></span>
+                            <span class="checkbox__text">Даю согласие на обработку персональных данных</span>
+                        </label>
+                    </div>
+
+                    <button type="submit" class="btn btn--hero form__submit" id="submit-btn">
+                        <span>Запросить доступ</span>
+                        <div class="loader" id="form-loader"></div>
+                    </button>
+                </form>
+
+                <div class="form-success" id="success-msg">
+                    <div class="success-icon"><i data-lucide="check-circle"></i></div>
+                    <h3>Заявка принята!</h3>
+                    <p>Наш эксперт свяжется с вами в течение 2 часов для обсуждения стратегии роста.</p>
+                    <button class="btn btn--header" id="reset-form">Отправить еще раз</button>
+                </div>
+            </div>
+
         </div>
     </div>
 </section>
