@@ -1070,3 +1070,223 @@ a {
         grid-template-columns: 1fr;
     }
 }
+/* --- CONTACT SECTION --- */
+.contact {
+    padding: 120px 0;
+    background-image: radial-gradient(circle at 100% 0%, rgba(34, 211, 238, 0.05) 0%, transparent 40%);
+}
+
+.contact__grid {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 100px;
+    align-items: center;
+}
+
+.contact__title {
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    margin: 15px 0 25px;
+}
+
+.contact__desc {
+    color: var(--text-muted);
+    font-size: 1.1rem;
+    margin-bottom: 40px;
+}
+
+.contact__details {
+    display: grid;
+    gap: 30px;
+}
+
+.contact__item {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.contact__icon {
+    width: 54px;
+    height: 54px;
+    background: var(--surface);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--accent);
+}
+
+.contact__item span {
+    display: block;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    letter-spacing: 1px;
+}
+
+.contact__item p {
+    font-weight: 600;
+    color: var(--white);
+}
+
+/* Form Styling */
+.contact__form-wrapper {
+    background: var(--surface);
+    padding: 50px;
+    border-radius: 40px;
+    border: 1px solid rgba(255, 255, 255, 0.03);
+    position: relative;
+    overflow: hidden;
+}
+
+.form__group {
+    margin-bottom: 20px;
+}
+
+.form__input {
+    width: 100%;
+    background: rgba(10, 12, 16, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 18px 25px;
+    border-radius: 16px;
+    color: var(--white);
+    font-family: inherit;
+    transition: var(--transition);
+}
+
+.form__input:focus {
+    outline: none;
+    border-color: var(--accent);
+    background: rgba(10, 12, 16, 0.8);
+    box-shadow: 0 0 15px rgba(34, 211, 238, 0.1);
+}
+
+.form__captcha {
+    margin-top: 30px;
+}
+
+.captcha-label {
+    display: block;
+    font-size: 0.9rem;
+    margin-bottom: 10px;
+    color: var(--text-muted);
+}
+
+.form__consent {
+    margin: 25px 0 35px;
+}
+
+.checkbox {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+}
+
+.checkbox input {
+    display: none;
+}
+
+.checkbox__box {
+    width: 20px;
+    height: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 6px;
+    flex-shrink: 0;
+    position: relative;
+    transition: var(--transition);
+}
+
+.checkbox input:checked+.checkbox__box {
+    background: var(--accent);
+    border-color: var(--accent);
+}
+
+.checkbox input:checked+.checkbox__box::after {
+    content: '✓';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: var(--bg);
+    font-weight: 900;
+}
+
+.form__submit {
+    width: 100%;
+    justify-content: center;
+    height: 60px;
+    position: relative;
+}
+
+/* Success Message State */
+.form-success {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--surface);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 40px;
+    transform: translateY(100%);
+    transition: transform 0.6s cubic-bezier(0.7, 0, 0.3, 1);
+    z-index: 5;
+}
+
+.form-success.active {
+    transform: translateY(0);
+}
+
+.success-icon {
+    width: 80px;
+    height: 80px;
+    background: rgba(16, 185, 129, 0.1);
+    color: #10b981;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 30px;
+}
+
+.success-icon svg {
+    width: 40px;
+    height: 40px;
+}
+
+/* Loader */
+.loader {
+    width: 24px;
+    height: 24px;
+    border: 3px solid rgba(10, 12, 16, 0.3);
+    border-top-color: var(--bg);
+    border-radius: 50%;
+    display: none;
+    animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Mobile */
+@media (max-width: 992px) {
+    .contact__grid {
+        grid-template-columns: 1fr;
+        gap: 60px;
+    }
+
+    .contact__form-wrapper {
+        padding: 30px;
+    }
+}

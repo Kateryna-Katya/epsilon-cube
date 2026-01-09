@@ -235,4 +235,69 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     lucide.createIcons();
+    // --- ЭТАП 4: FORM LOGIC ---
+
+    const form = document.getElementById('career-form');
+    const successMsg = document.getElementById('success-msg');
+    const resetBtn = document.getElementById('reset-form');
+    const phoneInput = document.getElementById('phone-input');
+    const captchaQ = document.getElementById('captcha-question');
+    const captchaA = document.getElementById('captcha-answer');
+    
+    let correctAnswer;
+
+    // 1. Генерация капчи
+    function generateCaptcha() {
+        const a = Math.floor(Math.random() * 10) + 1;
+        const b = Math.floor(Math.random() * 10) + 1;
+        correctAnswer = a + b;
+        captchaQ.innerText = `${a} + ${b}`;
+    }
+    generateCaptcha();
+
+    // 2. Валидация телефона (только цифры)
+    phoneInput.addEventListener('input', (e) => {
+        e.target.value = e.target.value.replace(/[^0-9]/g, '');
+    });
+
+    // 3. Обработка отправки (AJAX Simulation)
+    form.addEventListener('submit', (e) => {
+        e.preventDefault();
+
+        // Проверка капчи
+        if (parseInt(captchaA.value) !== correctAnswer) {
+            alert('Неверный ответ на защитный вопрос!');
+            generateCaptcha();
+            captchaA.value = '';
+            return;
+        }
+
+        const submitBtn = document.getElementById('submit-btn');
+        const loader = document.getElementById('form-loader');
+        const btnText = submitBtn.querySelector('span');
+
+        // Визуализация загрузки
+        btnText.style.display = 'none';
+        loader.style.display = 'block';
+        submitBtn.disabled = true;
+
+        setTimeout(() => {
+            // Успех!
+            successMsg.classList.add('active');
+            form.reset();
+            generateCaptcha();
+            
+            // Сброс состояния кнопки
+            btnText.style.display = 'block';
+            loader.style.display = 'none';
+            submitBtn.disabled = false;
+        }, 2000);
+    });
+
+    // 4. Сброс формы (кнопка "Отправить еще раз")
+    resetBtn.addEventListener('click', () => {
+        successMsg.classList.remove('active');
+    });
+
+    lucide.createIcons();
 });
