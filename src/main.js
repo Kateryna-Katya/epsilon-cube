@@ -209,4 +209,30 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     lucide.createIcons();
+    // --- ЭТАП 3.5: BLOG SECTION ANIMATIONS ---
+
+    gsap.from(".animate-blog", {
+        scrollTrigger: {
+            trigger: ".blog__grid",
+            start: "top 85%",
+        },
+        y: 60,
+        opacity: 0,
+        stagger: 0.2,
+        duration: 1,
+        ease: "power4.out"
+    });
+
+    // Добавляем микро-инзаимодействие для ссылок "Подробнее"
+    const blogLinks = document.querySelectorAll('.blog-card__link');
+    blogLinks.forEach(link => {
+        link.addEventListener('mouseenter', () => {
+            gsap.to(link.querySelector('svg'), { x: 5, duration: 0.3 });
+        });
+        link.addEventListener('mouseleave', () => {
+            gsap.to(link.querySelector('svg'), { x: 0, duration: 0.3 });
+        });
+    });
+
+    lucide.createIcons();
 });
