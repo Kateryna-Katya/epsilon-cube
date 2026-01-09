@@ -264,3 +264,205 @@ a {
         display: none;
     }
 }
+/* --- HERO SECTION --- */
+.hero {
+    position: relative;
+    min-height: 100vh;
+    /* На весь экран */
+    display: flex;
+    align-items: center;
+    padding-top: var(--header-h);
+    overflow: hidden;
+}
+
+.hero__bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    opacity: 0.4;
+    /* Чтобы не перебивать текст */
+    mix-blend-mode: screen;
+    /* Красивое наложение на темный фон */
+    pointer-events: none;
+    /* Чтобы не мешать скроллу на мобильных */
+}
+
+/* На десктопе включаем взаимодействие с фоном */
+@media (min-width: 1025px) {
+    .hero__bg {
+        pointer-events: all;
+    }
+}
+
+.hero__container {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    height: 100%;
+}
+
+.hero__content {
+    max-width: 800px;
+}
+
+.hero__title {
+    font-size: clamp(2.5rem, 6vw, 5rem);
+    /* Адаптивный размер */
+    font-weight: 800;
+    line-height: 1.1;
+    margin-bottom: 32px;
+    letter-spacing: -0.02em;
+}
+
+.hero__title .text-highlight {
+    color: var(--accent);
+    position: relative;
+    display: inline-block;
+}
+
+/* Для анимации SplitType */
+.hero__title .char {
+    transform: translateY(100%) rotate(5deg);
+    opacity: 0;
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+}
+
+.hero__subtitle {
+    font-size: clamp(1rem, 1.5vw, 1.2rem);
+    color: var(--text-muted);
+    max-width: 600px;
+    margin-bottom: 48px;
+    opacity: 0;
+    /* Начальное состояние для анимации */
+    transform: translateY(20px);
+}
+
+.hero__actions {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+    opacity: 0;
+    /* Начальное состояние для анимации */
+    transform: translateY(20px);
+}
+
+.btn--hero {
+    background: var(--accent);
+    color: var(--bg);
+    padding: 16px 40px;
+    font-size: 1rem;
+    gap: 8px;
+}
+
+.btn--hero:hover {
+    background: var(--white);
+    box-shadow: 0 0 30px rgba(34, 211, 238, 0.5);
+    transform: translateY(-2px);
+}
+
+.hero__status {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    font-weight: 500;
+}
+
+.status-dot {
+    width: 8px;
+    height: 8px;
+    background: #10b981;
+    /* Зеленый индикатор */
+    border-radius: 50%;
+    box-shadow: 0 0 10px #10b981;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+
+    50% {
+        transform: scale(1.5);
+        opacity: 0.5;
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* Scroll Down Indicator */
+.scroll-down {
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    color: var(--text-muted);
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.scroll-down__line {
+    width: 1px;
+    height: 60px;
+    background: linear-gradient(to bottom, var(--accent), transparent);
+    animation: scrollLine 2s cubic-bezier(0.77, 0, 0.175, 1) infinite;
+}
+
+@keyframes scrollLine {
+    0% {
+        transform: scaleY(0);
+        transform-origin: top;
+    }
+
+    50% {
+        transform: scaleY(1);
+        transform-origin: top;
+    }
+
+    50.1% {
+        transform: scaleY(1);
+        transform-origin: bottom;
+    }
+
+    100% {
+        transform: scaleY(0);
+        transform-origin: bottom;
+    }
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .hero__actions {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 24px;
+    }
+
+    .btn--hero {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .scroll-down {
+        display: none;
+    }
+
+    /* Убираем на мобильных, чтобы не перекрывать контент */
+}
