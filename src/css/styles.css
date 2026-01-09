@@ -1463,3 +1463,52 @@ h4 {
     opacity: 0;
     transform: translateY(30px);
 }
+/* 1. КАРДИНАЛЬНОЕ РЕШЕНИЕ ДЛЯ ЗАГОЛОВКОВ */
+h1,
+h2,
+h3,
+h4,
+.text-gradient,
+.text-highlight {
+    white-space: normal;
+    /* Разрешаем перенос только МЕЖДУ словами */
+    word-break: keep-all !important;
+    /* Запрет разрыва внутри слова */
+    overflow-wrap: normal !important;
+    /* Отключаем принудительный перенос */
+    hyphens: none !important;
+    /* Отключаем дефисы */
+    display: inline-block;
+    /* Помогает браузеру правильно считать границы слов */
+    width: 100%;
+}
+
+/* 2. ФИКС СВАЙПЕРА (ГРАНИЦЫ) */
+.innovation {
+    width: 100%;
+    overflow: hidden;
+    /* Строго обрезаем всё, что выходит за пределы экрана */
+    position: relative;
+}
+
+.innovation-slider {
+    width: 100%;
+    max-width: 100%;
+    /* Слайдер не может быть шире контейнера */
+    overflow: hidden !important;
+    /* Возвращаем скрытие лишних слайдов */
+    padding: 20px 0 80px 0 !important;
+}
+
+.swiper-wrapper {
+    display: flex;
+    /* Гарантируем горизонтальное выравнивание */
+}
+
+/* 3. ФИКС ИНСАЙТОВ (ВИДИМОСТЬ) */
+.animate-blog {
+    opacity: 1 !important;
+    /* Делаем видимым по умолчанию */
+    transform: none !important;
+    visibility: visible !important;
+}
