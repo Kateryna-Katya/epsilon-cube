@@ -1,34 +1,45 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/epsilon-cube/favicon.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vanilla App Template</title>
+<html lang="ru">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Epsilon-Cube | Карьерный апгрейд нового поколения</title>
+  <link rel="icon" href="img/favicon.svg" type="image/svg+xml">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Syne:wght@700;800&display=swap"
+    rel="stylesheet">
     <script type="module" crossorigin src="/epsilon-cube/index.js"></script>
-    <link rel="stylesheet" crossorigin href="/epsilon-cube/assets/styles-guStct1H.css">
+    <link rel="stylesheet" crossorigin href="/epsilon-cube/assets/styles-CzDw4JOQ.css">
   </head>
   <body>
+    <div id="scroll-content">
     <header class="header">
-  <div class="container">
-    <nav class="nav">
-      <a class="nav-logo" href="./index.html" aria-label="Site logo">
-        <svg class="nav-logo-icon" width="100" height="30">
-          <use href="{=$icon-path}"></use>
-        </svg>
-      </a>
-      <ul class="nav-list">
-        <li class="nav-item">
-          <a class="nav-link {=$highlight-act}" href="./page-2.html">Page 2</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link {=$highlight-curr}" href="./page-3.html">Page 3</a>
-        </li>
+  <div class="container header__container">
+    <a href="/" class="logo">
+      <span class="logo__cube"></span>
+      <span class="logo__text">Epsilon-Cube</span>
+    </a>
+
+    <nav class="nav" id="main-nav">
+      <ul class="nav__list">
+        <li><a href="#hero" class="nav__link">Главная</a></li>
+        <li><a href="#about" class="nav__link">Стратегии</a></li>
+        <li><a href="#benefits" class="nav__link">Преимущества</a></li>
+        <li><a href="#innovation" class="nav__link">Инновации</a></li>
+        <li><a href="#blog" class="nav__link">Инсайты</a></li>
       </ul>
     </nav>
+
+    <a href="#contact" class="btn btn--header">Связаться</a>
+
+    <button class="burger" aria-label="Menu">
+      <span></span>
+    </button>
   </div>
 </header>
-
 
     <main>
       <!-- Loads the specified .html file -->
@@ -36,21 +47,55 @@
     </main>
 
     <footer class="footer">
-  <div class="container">
-    <p class="footer-desc">
-      Made with ✨ by
-      <a
-        class="footer-link"
-        href="https://goit.global/ua/"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        GoIT team
+  <div class="container footer__grid">
+    <div class="footer__col">
+      <a href="/" class="logo logo--footer">
+        <span class="logo__cube"></span>
+        <span class="logo__text">Epsilon-Cube</span>
       </a>
-    </p>
+      <p class="footer__tagline">Ваш проводник в мире высоких карьерных достижений и инновационных решений.</p>
+    </div>
+
+    <div class="footer__col">
+      <h4 class="footer__title">Навигация</h4>
+      <ul class="footer__links">
+        <li><a href="#hero">Программа роста</a></li>
+        <li><a href="#about">Карьерный аудит</a></li>
+        <li><a href="#innovation">AI-инструменты</a></li>
+        <li><a href="#blog">Блог экспертов</a></li>
+      </ul>
+    </div>
+
+    <div class="footer__col">
+      <h4 class="footer__title">Юридическая информация</h4>
+      <ul class="footer__links">
+        <li><a href="privacy.html">Конфиденциальность</a></li>
+        <li><a href="cookies.html">Cookie файлы</a></li>
+        <li><a href="terms.html">Условия использования</a></li>
+        <li><a href="disclaimer.html">Отказ от ответственности</a></li>
+        <li><a href="personal-data-policy.html">Персональные данные</a></li>
+        <li><a href="return.html">Возврат средств</a></li>
+      </ul>
+    </div>
+
+    <div class="footer__col">
+      <h4 class="footer__title">Контакты (IT)</h4>
+      <address class="footer__address">
+        <p>Via Dante, 15<br>20121 Milano MI, Italia</p>
+        <a href="tel:+390212345678" class="footer__contact-link">+39 02 1234 5678</a>
+        <a href="mailto:hello@epsilon-cube.blog" class="footer__contact-link">hello@epsilon-cube.blog</a>
+      </address>
+    </div>
+  </div>
+  <div class="container footer__bottom">
+    <p>&copy; 2026 Epsilon-Cube. Предложение активно только в странах ЕС.</p>
   </div>
 </footer>
-
-
+</div>
+<script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.19/bundled/lenis.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+<script src="https://unpkg.com/lucide@latest"></script>
+<script src="script.js"></script>
   </body>
 </html>
