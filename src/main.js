@@ -132,4 +132,35 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Не забываем обновить иконки
     lucide.createIcons();
+    // --- ЭТАП 3.3: BENEFITS SPOTLIGHT EFFECT & GSAP ---
+
+    // 1. Трекинг мыши для эффекта Spotlight в Bento Grid
+    const bentoItems = document.querySelectorAll('.bento__item');
+    
+    bentoItems.forEach(item => {
+        item.addEventListener('mousemove', (e) => {
+            const rect = item.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            
+            item.style.setProperty('--mouse-x', `${x}px`);
+            item.style.setProperty('--mouse-y', `${y}px`);
+        });
+    });
+
+    // 2. Появление Bento Grid через GSAP
+    gsap.from(".animate-bento", {
+        scrollTrigger: {
+            trigger: ".bento",
+            start: "top 85%",
+        },
+        y: 50,
+        opacity: 0,
+        stagger: 0.1,
+        duration: 1,
+        ease: "power4.out"
+    });
+
+    // Обновляем иконки Lucide
+    lucide.createIcons();
 });
