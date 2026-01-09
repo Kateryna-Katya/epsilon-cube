@@ -1,15 +1,19 @@
 document.addEventListener('DOMContentLoaded', () => {
     
-    // --- 1. ПЛАВНЫЙ СКРОЛЛ (LENIS) ---
+    // --- 1. ИНИЦИАЛИЗАЦИЯ ПЛАВНОГО СКРОЛЛА (LENIS) ---
     const lenis = new Lenis({
         duration: 1.2,
         easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
         smoothWheel: true,
     });
-    function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
+
+    function raf(time) {
+        lenis.raf(time);
+        requestAnimationFrame(raf);
+    }
     requestAnimationFrame(raf);
 
-    // --- 2. HEADER & MOBILE MENU ---
+    // --- 2. МОБИЛЬНОЕ МЕНЮ И ХЕДЕР ---
     const header = document.querySelector('.header');
     const burger = document.querySelector('.burger');
     const mobileMenu = document.getElementById('mobile-menu');
@@ -25,10 +29,15 @@ document.addEventListener('DOMContentLoaded', () => {
         document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
     };
 
-    burger.addEventListener('click', toggleMenu);
-    mobileLinks.forEach(link => link.addEventListener('click', toggleMenu));
+    if (burger) {
+        burger.addEventListener('click', toggleMenu);
+    }
 
-    // --- 3. HERO BACKGROUND (VANTA) ---
+    mobileLinks.forEach(link => {
+        link.addEventListener('click', toggleMenu);
+    });
+
+    // --- 3. ФОН HERO (VANTA.JS) ---
     if (window.innerWidth > 768 && typeof VANTA !== 'undefined') {
         VANTA.NET({
             el: "#vanta-canvas",
@@ -41,75 +50,120 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // --- 4. GSAP АНИМАЦИИ ---
+    // --- 4. GSAP АНИМАЦИИ (БЕЗ СЕКЦИИ ИННОВАЦИЙ) ---
     gsap.registerPlugin(ScrollTrigger);
 
-    // Hero Text
+    // Hero: Анимация заголовка
     const heroTitle = new SplitType('.hero__title', { types: 'chars' });
     const heroTl = gsap.timeline({ delay: 0.5 });
+    
     heroTl.to(heroTitle.chars, {
-        y: 0, rotate: 0, opacity: 1, stagger: 0.03, duration: 1, ease: 'power4.out'
+        y: 0,
+        rotate: 0,
+        opacity: 1,
+        stagger: 0.03,
+        duration: 1,
+        ease: 'power4.out'
     }).to('.animate-fade', {
-        y: 0, opacity: 1, stagger: 0.2, duration: 0.8
+        y: 0,
+        opacity: 1,
+        stagger: 0.2,
+        duration: 0.8,
+        ease: 'power2.out'
     }, '-=0.5');
 
-    // Reveal elements on scroll
-    const revealElements = [".about__content .reveal-text", ".animate-bento", ".animate-blog"];
-    revealElements.forEach(selector => {
-        gsap.from(selector, {
-            scrollTrigger: { trigger: selector, start: "top 90%" },
-            y: 40, opacity: 0, stagger: 0.15, duration: 1, ease: "power3.out"
-        });
+    // Описание платформы (About)
+    gsap.from(".about__content .reveal-text", {
+        scrollTrigger: {
+            trigger: ".about",
+            start: "top 80%",
+        },
+        y: 40,
+        opacity: 0,
+        stagger: 0.15,
+        duration: 1
     });
 
-    // Stats counter
+    // Инсайты (Блог) - ИСПРАВЛЕНО ПОДГРУЗКА
+    gsap.to(".animate-blog", {
+        scrollTrigger: {
+            trigger: ".blog__grid",
+            start: "top 85%",
+        },
+        y: 0,
+        opacity: 1,
+        stagger: 0.2,
+        duration: 0.8,
+        ease: "power2.out",
+        onStart: () => {
+            document.querySelectorAll('.animate-blog').forEach(el => el.style.visibility = 'visible');
+        }
+    });
+
+    // Счетчики в статистике
     document.querySelectorAll('.stat-item__num').forEach(counter => {
-        const val = +counter.getAttribute('data-val');
+        const target = +counter.getAttribute('data-val');
         gsap.to(counter, {
-            scrollTrigger: { trigger: counter },
-            innerText: val, duration: 2, snap: { innerText: 1 }
+            scrollTrigger: { trigger: counter, start: "top 90%" },
+            innerText: target,
+            duration: 2,
+            snap: { innerText: 1 }
         });
     });
 
-    // --- 5. SWIPER (INNOVATION) ---
-    new Swiper('.innovation-slider', {
-        slidesPerView: 1, spaceBetween: 20, loop: true,
-        autoplay: { delay: 4000 },
+    // --- 5. SWIPER (ИННОВАЦИИ) - БЕЗ GSAP ---
+    const innovationSwiper = new Swiper('.innovation-slider', {
+        slidesPerView: 1,
+        spaceBetween: 20,
+        loop: true,
+        autoplay: { delay: 4000, disableOnInteraction: false },
         pagination: { el: '.inv-pagination', clickable: true },
         navigation: { nextEl: '.inv-next', prevEl: '.inv-prev' },
-        breakpoints: { 640: { slidesPerView: 2 }, 1024: { slidesPerView: 3 } }
+        breakpoints: {
+            640: { slidesPerView: 2, spaceBetween: 30 },
+            1024: { slidesPerView: 3, spaceBetween: 40 }
+        }
     });
 
-    // --- 6. КОНТАКТНАЯ ФОРМА ---
+    // --- 6. КОНТАКТНАЯ ФОРМА И КАПЧА ---
     const form = document.getElementById('career-form');
     const captchaQ = document.getElementById('captcha-question');
     const captchaA = document.getElementById('captcha-answer');
     let correctAnswer;
 
-    const genCaptcha = () => {
-        const a = Math.floor(Math.random() * 10) + 1, b = Math.floor(Math.random() * 10) + 1;
+    const generateCaptcha = () => {
+        const a = Math.floor(Math.random() * 10) + 1;
+        const b = Math.floor(Math.random() * 10) + 1;
         correctAnswer = a + b;
-        if(captchaQ) captchaQ.innerText = `${a} + ${b}`;
+        if (captchaQ) captchaQ.innerText = `${a} + ${b}`;
     };
-    genCaptcha();
+    generateCaptcha();
 
-    if(form) {
+    if (form) {
         form.addEventListener('submit', (e) => {
             e.preventDefault();
             if (parseInt(captchaA.value) !== correctAnswer) {
-                alert('Ошибка капчи!'); return genCaptcha();
+                alert('Неверный ответ капчи!');
+                generateCaptcha();
+                captchaA.value = '';
+                return;
             }
+
             const btn = document.getElementById('submit-btn');
+            const loader = document.getElementById('form-loader');
+            const btnText = btn.querySelector('span');
+
+            btnText.style.opacity = '0';
+            loader.style.display = 'block';
             btn.disabled = true;
-            btn.querySelector('span').style.opacity = '0';
-            document.getElementById('form-loader').style.display = 'block';
 
             setTimeout(() => {
                 document.getElementById('success-msg').classList.add('active');
-                form.reset(); genCaptcha();
+                form.reset();
+                generateCaptcha();
+                btnText.style.opacity = '1';
+                loader.style.display = 'none';
                 btn.disabled = false;
-                btn.querySelector('span').style.opacity = '1';
-                document.getElementById('form-loader').style.display = 'none';
             }, 2000);
         });
     }
@@ -118,20 +172,22 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('success-msg').classList.remove('active');
     });
 
-    // --- 7. COOKIE POPUP LOGIC ---
+    // --- 7. COOKIE POPUP ---
     const cookiePopup = document.getElementById('cookie-popup');
     const cookieBtn = document.getElementById('cookie-accept');
 
-    if (!localStorage.getItem('epsilon_cookies_accepted')) {
-        setTimeout(() => cookiePopup.classList.add('active'), 2000);
+    if (cookiePopup && !localStorage.getItem('epsilon_cookies_accepted')) {
+        setTimeout(() => {
+            cookiePopup.classList.add('active');
+        }, 3000);
     }
 
-    cookieBtn.addEventListener('click', () => {
+    cookieBtn?.addEventListener('click', () => {
         localStorage.setItem('epsilon_cookies_accepted', 'true');
         cookiePopup.classList.remove('active');
     });
 
-    // --- 8. SPOTLIGHT EFFECT ---
+    // --- 8. ЭФФЕКТ МАГНИТНЫХ КАРТОЧЕК ---
     document.querySelectorAll('.bento__item').forEach(item => {
         item.addEventListener('mousemove', (e) => {
             const rect = item.getBoundingClientRect();
@@ -140,5 +196,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
+    // Инициализация иконок
     lucide.createIcons();
 });

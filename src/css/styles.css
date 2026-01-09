@@ -1430,3 +1430,36 @@ h4 {
     transform: rotate(-45deg);
     top: 0;
 }
+h1,
+h2,
+h3,
+h4 {
+    text-wrap: balance;
+    /* Равномерное распределение слов */
+    word-break: keep-all;
+    /* Запрет разрыва слов */
+    overflow-wrap: normal;
+    hyphens: none;
+    /* Отключить автоматические переносы */
+}
+
+/* Принудительный запрет переноса для акцентных фраз */
+.text-gradient,
+.text-highlight {
+    white-space: nowrap;
+}
+
+@media (max-width: 480px) {
+
+    /* На очень маленьких экранах разрешаем перенос, чтобы не ломать верстку */
+    .text-gradient,
+    .text-highlight {
+        white-space: normal;
+    }
+}
+
+/* Скрываем элементы блога до загрузки GSAP (только если JS включен) */
+.animate-blog {
+    opacity: 0;
+    transform: translateY(30px);
+}
