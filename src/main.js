@@ -163,4 +163,50 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Обновляем иконки Lucide
     lucide.createIcons();
+    // --- ЭТАП 3.4: INNOVATION SLIDER INITIALIZATION ---
+
+    const innovationSwiper = new Swiper('.innovation-slider', {
+        slidesPerView: 1,
+        spaceBetween: 20,
+        loop: true,
+        centeredSlides: false,
+        speed: 800,
+        autoplay: {
+            delay: 4000,
+            disableOnInteraction: false,
+        },
+        pagination: {
+            el: '.inv-pagination',
+            clickable: true,
+        },
+        navigation: {
+            nextEl: '.inv-next',
+            prevEl: '.inv-prev',
+        },
+        breakpoints: {
+            640: {
+                slidesPerView: 2,
+                spaceBetween: 30,
+            },
+            1024: {
+                slidesPerView: 3,
+                spaceBetween: 40,
+            },
+        }
+    });
+
+    // GSAP анимация заголовка секции
+    gsap.from(".innovation__header > *", {
+        scrollTrigger: {
+            trigger: ".innovation",
+            start: "top 80%",
+        },
+        y: 30,
+        opacity: 0,
+        stagger: 0.2,
+        duration: 1,
+        ease: "power3.out"
+    });
+
+    lucide.createIcons();
 });
