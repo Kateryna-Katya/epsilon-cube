@@ -1290,3 +1290,143 @@ a {
         padding: 30px;
     }
 }
+/* ПРЕДОТВРАЩЕНИЕ РАЗРЫВА СЛОВ В ЗАГОЛОВКАХ */
+h1,
+h2,
+h3,
+h4 {
+    text-wrap: balance;
+    /* Равномерное распределение слов по строкам */
+    word-break: keep-all;
+    /* Запрещает разрыв слова */
+    overflow-wrap: break-word;
+    /* Но позволяет перенос, если слово шире экрана */
+    hyphens: none;
+    /* Отключает автоматические переносы */
+}
+
+/* МОБИЛЬНОЕ МЕНЮ */
+.mobile-menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2000;
+    visibility: hidden;
+    pointer-events: none;
+    transition: var(--transition);
+}
+
+.mobile-menu.active {
+    visibility: visible;
+    pointer-events: all;
+}
+
+.mobile-menu__backdrop {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: rgba(10, 12, 16, 0.95);
+    backdrop-filter: blur(10px);
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+.mobile-menu.active .mobile-menu__backdrop {
+    opacity: 1;
+}
+
+.mobile-menu__content {
+    position: relative;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform: translateY(30px);
+    opacity: 0;
+    transition: all 0.5s ease;
+}
+
+.mobile-menu.active .mobile-menu__content {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.mobile-nav__list {
+    text-align: center;
+}
+
+.mobile-nav__link {
+    display: block;
+    font-family: 'Syne', sans-serif;
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--white);
+    margin-bottom: 20px;
+    text-transform: uppercase;
+}
+
+.mobile-nav__link--cta {
+    color: var(--accent);
+}
+
+/* COOKIE POPUP */
+.cookie-popup {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%) translateY(150%);
+    width: 90%;
+    max-width: 500px;
+    background: var(--surface);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 20px 30px;
+    border-radius: 20px;
+    z-index: 3000;
+    transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+}
+
+.cookie-popup.active {
+    transform: translateX(-50%) translateY(0);
+}
+
+.cookie-popup__container {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    justify-content: space-between;
+}
+
+.cookie-popup__text {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+}
+
+.cookie-popup__text a {
+    color: var(--accent);
+    text-decoration: underline;
+}
+
+@media (max-width: 640px) {
+    .cookie-popup__container {
+        flex-direction: column;
+        text-align: center;
+    }
+}
+
+/* Состояние бургера при открытии */
+.burger.active span {
+    background: transparent;
+}
+
+.burger.active span::before {
+    transform: rotate(45deg);
+    top: 0;
+}
+
+.burger.active span::after {
+    transform: rotate(-45deg);
+    top: 0;
+}
