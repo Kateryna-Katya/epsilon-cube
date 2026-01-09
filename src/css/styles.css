@@ -1621,3 +1621,250 @@ h4,
         opacity: 1;
     }
 }
+/* --- СТИЛИ ДЛЯ ЮРИДИЧЕСКИХ СТРАНИЦ --- */
+.pages {
+    padding: 160px 0 100px;
+    /* Отступ сверху, чтобы хедер не перекрывал h1 */
+    background-color: var(--bg);
+    min-height: 100vh;
+}
+
+.pages h1 {
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    margin-bottom: 50px;
+    line-height: 1.1;
+}
+
+.pages__content {
+    max-width: 900px;
+    /* Ограничиваем ширину для удобства чтения */
+}
+
+.pages h2 {
+    font-size: 1.8rem;
+    color: var(--white);
+    margin: 40px 0 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgba(34, 211, 238, 0.2);
+}
+
+.pages p {
+    font-size: 1.1rem;
+    color: var(--text-muted);
+    margin-bottom: 20px;
+    line-height: 1.7;
+}
+
+.pages ul {
+    margin: 25px 0;
+}
+
+.pages li {
+    position: relative;
+    padding-left: 30px;
+    margin-bottom: 15px;
+    color: var(--text-muted);
+    line-height: 1.6;
+}
+
+.pages li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 10px;
+    width: 12px;
+    height: 2px;
+    background: var(--accent);
+}
+
+.pages li strong {
+    color: var(--white);
+    display: block;
+    margin-bottom: 5px;
+}
+
+.pages__link {
+    color: var(--accent);
+    font-weight: 600;
+    border-bottom: 1px solid transparent;
+    transition: var(--transition);
+}
+
+.pages__link:hover {
+    border-color: var(--accent);
+}
+
+/* Адаптив */
+@media (max-width: 768px) {
+    .pages {
+        padding-top: 120px;
+    }
+
+    .pages h1 {
+        font-size: 1.6rem;
+    }
+
+    .pages h2 {
+        font-size: 1.5rem;
+    }
+}
+/* Дополнительные стили специально для Дисклеймера */
+
+.pages__content strong {
+    color: var(--accent);
+    /* Выделяем заголовки блоков внутри текста нашим Cyan */
+    font-family: 'Syne', sans-serif;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+    display: block;
+    margin-bottom: 8px;
+}
+
+.pages__content p {
+    background: rgba(255, 255, 255, 0.02);
+    /* Легкая подложка для блоков */
+    padding: 25px;
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    margin-bottom: 20px;
+}
+
+.pages__footer {
+    margin-top: 50px;
+    padding-top: 30px;
+    border-top: 1px solid rgba(34, 211, 238, 0.1);
+}
+
+/* Фикс для заголовка: запрет разрыва слова "ответственности" */
+.pages h1 .text-gradient {
+    white-space: nowrap;
+}
+
+@media (max-width: 480px) {
+    .pages h1 .text-gradient {
+        white-space: normal;
+    }
+}
+/* Дополнительные стили для многоуровневых списков в Политике */
+
+.pages__content ul ul {
+    margin-top: 10px;
+    margin-left: 20px;
+    border-left: 1px solid rgba(34, 211, 238, 0.1);
+    padding-left: 20px;
+}
+
+.pages__content ul ul li::before {
+    width: 8px;
+    background: var(--text-muted);
+    /* Вложенные списки менее яркие */
+}
+
+.pages__content h2 {
+    /* Добавляем порядковый номер или акцент перед h2 через псевдоэлемент, если нужно */
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+/* Фикс для мобильной версии, чтобы длинные email не ломали контейнер */
+.pages__link {
+    word-break: break-all;
+}
+
+/* Плавное появление контента (если используется анимация) */
+.pages__content {
+    animation: fadeInUp 0.8s ease forwards;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+/* Стили для h3 внутри юридических страниц */
+.pages__content h3 {
+    font-size: 1.3rem;
+    color: var(--white);
+    margin: 30px 0 15px;
+    font-family: 'Syne', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Улучшение читаемости списков в Политике Конфиденциальности */
+.pages__content ul {
+    margin-bottom: 25px;
+}
+
+.pages__content li {
+    font-size: 1rem;
+    margin-bottom: 12px;
+    padding-left: 25px;
+}
+
+/* Фикс для заголовка: запрет разрыва слова "конфиденциальности" */
+.pages h1 .text-gradient {
+    white-space: nowrap;
+}
+
+@media (max-width: 600px) {
+    .pages h1 .text-gradient {
+        white-space: normal;
+    }
+}
+/* Специальный фикс для страницы возврата */
+.pages h1 .text-gradient {
+    white-space: nowrap !important;
+    /* Гарантированный запрет разрыва слова 'средств' */
+}
+
+.pages__content ol {
+    margin: 30px 0;
+    counter-reset: item;
+}
+
+.pages__content ol li {
+    display: block;
+    position: relative;
+    padding-left: 50px;
+    margin-bottom: 25px;
+    color: var(--text-muted);
+}
+
+.pages__content ol li::before {
+    content: counter(item);
+    counter-increment: item;
+    position: absolute;
+    left: 0;
+    top: -5px;
+    width: 35px;
+    height: 35px;
+    background: rgba(34, 211, 238, 0.1);
+    border: 1px solid var(--accent);
+    color: var(--accent);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 0.9rem;
+}
+
+/* Стилизация информационных блоков */
+.pages__content p strong {
+    color: var(--white);
+}
+
+.pages__content ul li strong {
+    display: inline;
+    /* В этой политике лучше оставить инлайново */
+    color: var(--accent);
+}
